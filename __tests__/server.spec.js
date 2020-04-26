@@ -8,17 +8,13 @@ describe("server.js", () => {
 
   describe("GET /", () => {
     it("returns 200 OK", async () => {
-      await request(server)
-        .get("/")
-        .then((res) => {
-          expect(200);
-        });
+      await request(server).get("/").expect(200);
     });
     it("returns {api: 'is up'}", async () => {
       await request(server)
         .get("/")
         .then((res) => {
-          expect(res.body).toEqual({api: 'is up'});
+          expect(res.body).toEqual({ api: "is up" });
         });
     });
   });
