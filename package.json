@@ -29,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.0",
     "pg": "^8.0.3",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4.1.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
