@@ -6,6 +6,13 @@ module.exports = {
     connection: {
       filename: "./data/db.sqlite3",
     },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
   staging: {
@@ -15,6 +22,7 @@ module.exports = {
       user: "username",
       password: "password",
     },
+    useNullAsDefault: true,
     pool: {
       min: 2,
       max: 10,
@@ -35,6 +43,7 @@ module.exports = {
       user: "username",
       password: "password",
     },
+    useNullAsDefault: true,
     pool: {
       min: 2,
       max: 10,
