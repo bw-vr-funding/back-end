@@ -12,12 +12,11 @@ router.post('/register', (req, res) => {
 
     const hash = bcrypt.hashSync(user.password, rounds);
 
-    user.password = hash; // don't understand assigning hash again.  just did it above.
+    user.password = hash;
 
     Users.add(user)
     
     .then(saved => {
-        console.log('***', user)
         res.status(201).json(saved)
     })
     .catch(error => {
