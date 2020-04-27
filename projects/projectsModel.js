@@ -1,8 +1,9 @@
 const db = require("../data/dbConfig");
 
 module.exports = {
-    getAll,
+  getAll,
   add,
+  delete,
 };
 
 function getAll() {
@@ -12,3 +13,8 @@ function getAll() {
 function add(project) {
   return db("projects").insert(project);
 }
+
+function add(project) {
+  return db("projects").insert(project);
+}
+
