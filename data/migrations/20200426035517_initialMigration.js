@@ -4,19 +4,19 @@ exports.up = function (knex) {
       tbl.increments();
       tbl.string("username", 24).notNullable().unique();
       tbl.string("password").notNullable();
-      tbl.string("email").notNullable();
     })
     .createTable("projects", (tbl) => {
       tbl.increments();
       tbl.string("name", 40).notNullable().unique();
       tbl.string("description").notNullable();
-      tbl.string("img_url").notNullable();
+      tbl.string("img_url")
       tbl.string("category", 16).notNullable();
       tbl.integer("funding_goal").notNullable();
       tbl.integer("funding").notNullable();
       tbl
         .integer("creator_id")
         .unsigned()
+        .notNullable()
         .references("id")
         .inTable("users");
     })
