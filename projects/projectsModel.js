@@ -6,6 +6,7 @@ module.exports = {
   add,
   del,
   update,
+  getBy
 };
 
 function getAll() {
@@ -26,4 +27,8 @@ function del(id) {
 
 function update(id, update) {
   return db("projects").update(update).where({id});
+}
+
+function getBy(filter) {
+  return db('projects').where(filter)
 }
