@@ -5,8 +5,6 @@ const authRouter = require("../auth/auth-router");
 const projectsRouter = require("../projects/projectsRouter");
 const authenticator = require('../auth/authenticator')
 
-const server = express();
-
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
