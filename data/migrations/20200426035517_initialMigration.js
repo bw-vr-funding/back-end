@@ -18,7 +18,8 @@ exports.up = function (knex) {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("users");
+        .inTable("users")
+        .onDelete("CASCADE");
     })
     .createTable("users-projects", (tbl) => {
       tbl.increments();
@@ -27,13 +28,15 @@ exports.up = function (knex) {
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("users");
+        .inTable("users")
+        .onDelete("CASCADE");
       tbl
         .integer("project_id")
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("users");
+        .inTable("users")
+        .onDelete("CASCADE");
     });
 };
 

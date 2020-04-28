@@ -3,8 +3,8 @@ const server = require("../api/server");
 const db = require("../data/dbConfig");
 
 beforeEach(async () => {
+   await db("projects").truncate();
   await db("users").truncate();
-  await db("projects").truncate();
 });
 
 describe("server.js", () => {
