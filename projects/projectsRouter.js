@@ -11,6 +11,18 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+
+  md.getById(id)
+    .then((project) => {
+      res.json(project);
+    })
+    .catch((err) => {
+      res.status(500).json({ errorMessage: "server error" });
+    });
+});
+
 router.post("/", (req, res) => {
   const project = req.body;
 

@@ -16,6 +16,17 @@ exports.seed = function(knex) {
           funding: 163290,
           creator_id: 1,
         },
+        {
+          id: 2,
+          name: "vr doc",
+          description: "Get diagnosed by professionals in VR",
+          img_url:
+            "https://frontiersinblog.files.wordpress.com/2018/08/frontiers-ai-robotics-vr-virtual-reality-child-abuse.jpg",
+          category: "health",
+          funding_goal: 30000,
+          funding: 3290,
+          creator_id: 1,
+        },
       ]);
     });
 };
