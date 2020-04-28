@@ -35,13 +35,13 @@ describe("auth-router.js", () => {
     });
   });
   describe("POST /auth/login", () => {
-    it("returns 401 Unauthorized without right credentials", async () => {
+    it("returns 401 Unauthorized w/out right credentials", async () => {
       await request(server)
         .post("/auth/login")
         .send({ username: "wrong", password: "credentials" })
         .expect(401);
     });
-    it("returns 200 OK with right credentials", async () => {
+    it("returns 200 OK w/ right credentials", async () => {
       await request(server)
         .post("/auth/register")
         .send({ username: "right", password: "credentials" })
@@ -52,5 +52,28 @@ describe("auth-router.js", () => {
             .expect(200);
         });
     });
+  });
+});
+
+describe("GET /projects", () => {
+  it("returns 401 Unauthorized w/out token", async () => {
+    await request(server).get("/projects").expect(401);
+  });
+  it("returns 200 OK w/ token", async () => {
+    await request(server)
+      .post("/auth/register")
+      .send({ username: "test", password: "projects" })
+      .then(async () => {
+        await request(server)
+          .post("/auth/login")
+          .send({ username: "test", password: "projects" })
+          .then(async (res) => {
+            const token = res.body.token;
+            await request(server)
+              .get("/projects")
+              .set("Authorization", token)
+              .expect(200);
+          });
+      });
   });
 });
