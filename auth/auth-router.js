@@ -20,7 +20,7 @@ router.post('/register', (req, res) => {
         res.status(201).json({message: "user added"})
     })
     .catch(error => {
-        console.log(error);
+        
         res.status(500).json({ message: error.message})
     });
 });
@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(error => {
-            console.log(error);
+            
             res.status(500).json({ error: error.message})
         })
 });
