@@ -3,8 +3,8 @@ const server = require("../api/server");
 const db = require("../data/dbConfig");
 
 beforeEach(async () => {
-  await db("users").truncate();
   await db("projects").truncate();
+  await db("users").truncate();
 });
 
 describe("server.js", () => {
@@ -81,16 +81,16 @@ describe("GET /projects", () => {
 
 describe("POST /projects", () => {
   const project = {
-          id: 1,
-          name: "loup-garou pour une nuit",
-          description: "One of the most loved french party game ever created",
-          img_url:
-            "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTcvaksBQhrVCyZL4yvLy6WhAcg1GN9mC9tNdganvq8zKAWMIpk-QQ&usqp=CAc",
-          category: "game",
-          funding_goal: 200000,
-          funding: 163290,
-          creator_id: 1,
-        }
+    id: 1,
+    name: "loup-garou pour une nuit",
+    description: "One of the most loved french party game ever created",
+    img_url:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTcvaksBQhrVCyZL4yvLy6WhAcg1GN9mC9tNdganvq8zKAWMIpk-QQ&usqp=CAc",
+    category: "game",
+    funding_goal: 200000,
+    funding: 163290,
+    creator_id: 1,
+  };
   it("returns 401 Unauthorized w/out token", async () => {
     await request(server).post("/projects").send(project).expect(401);
   });
@@ -102,7 +102,7 @@ describe("POST /projects", () => {
         await request(server)
           .post("/auth/login")
           .send({ username: "test", password: "projects" })
-          .then( (res) => {
+          .then((res) => {
             const token = res.body.token;
             return request(server)
               .post("/projects")
