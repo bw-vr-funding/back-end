@@ -41,7 +41,7 @@ router.put("/:id", (req, res) => {
 
   md.update(id, project)
     .then((added) => {
-      res.status(201).json({ added });
+      res.status(200).json({ added });
     })
     .catch((err) => {
       res.status(500).json({ errorMessage: "server error" });
