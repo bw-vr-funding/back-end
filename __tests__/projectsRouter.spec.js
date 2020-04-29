@@ -97,6 +97,31 @@ describe("GET /projects/:id", () => {
   });
 });
 
+describe("GET /projects/category/:category", () => {
+  it("returns 401 without token", async () => {
+    await request(server).get("/projects/category/game").expect(401);
+  });
+  it("returns 200 with valid token", async () => {
+    await request(server)
+      .post("/auth/register")
+      .send({ username: "test", password: "projects" })
+      .then(async () => {
+        await request(server)
+          .post("/auth/login")
+          .send({ username: "test", password: "projects" })
+          .then(async (res) => {
+            const token = res.body.token;
+            await request(server)
+              .get("/projects")
+              .set("Authorization", token)
+              .then((response) => {
+                expect(200);
+              });
+          });
+      });
+  });
+});
+
 describe("POST /projects", () => {
   it("returns 401 Unauthorized w/out token", async () => {
     await request(server).post("/projects").send(project).expect(401);
@@ -211,3 +236,5 @@ describe("PUT /projects/:id", () => {
       });
   });
 });
+
+
