@@ -32,3 +32,27 @@ function update(id, update) {
 function getBy(filter) {
   return db('projects').where(filter)
 }
+
+
+// describe("GET /projects", () => {
+//   it("returns 401 Unauthorized w/out token", async () => {
+//     await request(server).get("/projects").expect(401);
+//   });
+//   it("returns 200 OK w/ token", async () => {
+//     await request(server)
+//       .post("/auth/register")
+//       .send({ username: "test", password: "projects" })
+//       .then(async () => {
+//         await request(server)
+//           .post("/auth/login")
+//           .send({ username: "test", password: "projects" })
+//           .then(async (res) => {
+//             const token = res.body.token;
+//             await request(server)
+//               .get("/projects")
+//               .set("Authorization", token)
+//               .expect(200);
+//           });
+//       });
+//   });
+// });
