@@ -204,7 +204,7 @@ describe("PUT /projects/:id", () => {
               .set("Authorization", token)
               .send(project2)
               .then(async() => {
-                  expect(await db("projects").where({id}).first()).toEqual(project2)
+                  expect(await db("projects").where({id}).first()).toEqual({...project2, id: 1})
               });
               
           });
