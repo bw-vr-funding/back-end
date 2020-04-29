@@ -63,7 +63,7 @@ router.delete("/:id", (req, res) => {
 router.get('/category/:category', (req, res) => {
   const { category } = req.params;
 
-  md.getBy({ category })
+  md.getBy( { category } )
     .then((projects) => {
       if (projects.length > 0) {
         res.status(200).json({projects})

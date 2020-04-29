@@ -32,3 +32,5 @@ function update(id, update) {
 function getBy(filter) {
   return db('projects').where(filter)
 }
+
+
