@@ -8,7 +8,9 @@ const secrets = require('../api/secrets');
 router.post('/register', (req, res) => {
     const user = req.body;
 
-    const rounds = process.env.HASH_ROUNDS || 1
+
+    const rounds = Number(process.env.HASH_ROUNDS) || 1
+
 
     const hash = bcrypt.hashSync(user.password, rounds);
 
@@ -21,7 +23,7 @@ router.post('/register', (req, res) => {
     })
     .catch(error => {
         
-        res.status(500).json({ message: error.message})
+        res.status(500).json({ error: "server error" });
     });
 });
 
@@ -40,7 +42,7 @@ router.post('/login', (req, res) => {
         })
         .catch(error => {
             
-            res.status(500).json({ error: error.message})
+            res.status(500).json({ error: "server error"})
         })
 });
 
