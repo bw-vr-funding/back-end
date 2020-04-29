@@ -56,6 +56,18 @@ describe("auth-router.js", () => {
   });
 });
 
+const project = {
+  id: 1,
+  name: "loup-garou pour une nuit",
+  description: "One of the most loved french party game ever created",
+  img_url:
+    "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTcvaksBQhrVCyZL4yvLy6WhAcg1GN9mC9tNdganvq8zKAWMIpk-QQ&usqp=CAc",
+  category: "game",
+  funding_goal: 200000,
+  funding: 163290,
+  creator_id: 1,
+};
+
 describe("GET /projects", () => {
   it("returns 401 Unauthorized w/out token", async () => {
     await request(server).get("/projects").expect(401);
@@ -79,18 +91,53 @@ describe("GET /projects", () => {
   });
 });
 
+describe("GET /projects/:id", () => {
+  it("returns 401 Unauthorized w/out token", async () => {
+    await request(server).get("/projects/1").expect(401);
+  });
+  it("returns 200 OK w/ token", async () => {
+    await request(server)
+      .post("/auth/register")
+      .send({ username: "test", password: "projects" })
+      .then(async () => {
+        await request(server)
+          .post("/auth/login")
+          .send({ username: "test", password: "projects" })
+          .then(async (res) => {
+            const token = res.body.token;
+            await request(server)
+              .get("/projects/1")
+              .set("Authorization", token)
+              .expect(200);
+          });
+          
+      });
+  });
+  it("returns the project with the right id w/ token", async () => {
+    
+    await request(server)
+      .post("/auth/register")
+      .send({ username: "test", password: "projects" })
+      .then(async () => {
+        await request(server)
+          .post("/auth/login")
+          .send({ username: "test", password: "projects" })
+          .then(async (res) => {
+            const token = res.body.token;
+            await db("projects").insert(project);
+            await request(server)
+              .get("/projects/1")
+              .set("Authorization", token)
+              .then(res => {
+                expect(res.body).toEqual(project)
+              });
+          });
+      });
+  });
+});
+
 describe("POST /projects", () => {
-  const project = {
-    id: 1,
-    name: "loup-garou pour une nuit",
-    description: "One of the most loved french party game ever created",
-    img_url:
-      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTcvaksBQhrVCyZL4yvLy6WhAcg1GN9mC9tNdganvq8zKAWMIpk-QQ&usqp=CAc",
-    category: "game",
-    funding_goal: 200000,
-    funding: 163290,
-    creator_id: 1,
-  };
+  
   it("returns 401 Unauthorized w/out token", async () => {
     await request(server).post("/projects").send(project).expect(401);
   });
