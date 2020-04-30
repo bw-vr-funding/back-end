@@ -221,20 +221,20 @@ describe("PUT /projects/:id", () => {
         await request(server)
           .post("/auth/login")
           .send({ username: "test", password: "projects" })
-          .then(async(res) => {
+          .then(async (res) => {
             const token = res.body.token;
-            await db("projects").insert(project)
+            await db("projects").insert(project);
             await request(server)
               .put(`/projects/${id}`)
               .set("Authorization", token)
               .send(project2)
-              .then(async() => {
-                  expect(await db("projects").where({id}).first()).toEqual({...project2, id: 1})
+              .then(async () => {
+                expect(await db("projects").where({ id }).first()).toEqual({
+                  ...project2,
+                  id: 1,
+                });
               });
-              
           });
       });
   });
 });
-
-

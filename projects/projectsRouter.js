@@ -23,6 +23,22 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.get("/category/:category", (req, res) => {
+  const { category } = req.params;
+
+  md.getBy({ category })
+    .then((projects) => {
+      if (projects.length > 0) {
+        res.status(200).json({ projects });
+      } else {
+        res.status(404).json({ message: "No projects found" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "server error" });
+    });
+});
+
 router.post("/", (req, res) => {
   const project = req.body;
 
@@ -59,20 +75,5 @@ router.delete("/:id", (req, res) => {
       res.status(500).json({ errorMessage: "server error" });
     });
 });
-
-router.get('/category/:category', (req, res) => {
-  const { category } = req.params;
-
-  md.getBy( { category } )
-    .then((projects) => {
-      if (projects.length > 0) {
-        res.status(200).json({projects})
-      } else {
-        res.status(404).json({message: "No projects found"})
-      }
-    }).catch(err => {
-      res.status(500).json({ error: "server error" });
-    })
-})
 
 module.exports = router;
