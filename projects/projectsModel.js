@@ -3,10 +3,11 @@ const db = require("../data/dbConfig");
 module.exports = {
   getAll,
   getById,
+  getBy,
+  getByFunderId,
   add,
   del,
   update,
-  getBy,
 };
 
 function getAll() {
@@ -15,6 +16,14 @@ function getAll() {
 
 function getById(id) {
   return db("projects").where({ id }).first();
+}
+
+function getBy(filter) {
+  return db("projects").where(filter);
+}
+
+function getByFunderId(funder_id) {
+  return db("projects").where({funder_id});
 }
 
 function add(project) {
@@ -27,8 +36,4 @@ function del(id) {
 
 function update(id, update) {
   return db("projects").update(update).where({ id });
-}
-
-function getBy(filter) {
-  return db("projects").where(filter);
 }
