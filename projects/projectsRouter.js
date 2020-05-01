@@ -28,7 +28,7 @@ router.get("/creator/:creator_id", (req, res) => {
 
   md.getBy({ creator_id })
     .then((projects) => {
-      if (projects) {
+      if (projects.length > 0) {
         res.json({ projects });
       } else {
         res.status(404).json({ message: "You have no projects" });
