@@ -4,7 +4,6 @@ module.exports = {
   getAll,
   getById,
   getBy,
-  getByFunderId,
   add,
   del,
   update,
@@ -20,12 +19,6 @@ function getById(id) {
 
 function getBy(filter) {
   return db("projects").where(filter);
-}
-
-function getByFunderId(funder_id) {
-  return db("projects")
-    .join("users-projects", "users-projects.project_id", "=", "projects.id")
-    .where({ funder_id });
 }
 
 function add(project) {
