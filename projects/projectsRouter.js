@@ -24,20 +24,20 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/creator/:creator_id", (req, res) => {
-  const {creator_id} = req.params;
+  const { creator_id } = req.params;
 
   md.getBy({ creator_id })
-  .then(projects => {
-    if(projects) {
-      res.json({projects})
-    } else {
-      res.status(404).json({message: "You have no projects"})
-    }
-  })
-  .catch(err => {
-    res.status(500).json({error: "server error"})
-  })
-})
+    .then((projects) => {
+      if (projects) {
+        res.json({ projects });
+      } else {
+        res.status(404).json({ message: "You have no projects" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "server error" });
+    });
+});
 
 router.get("/category/:category", (req, res) => {
   const { category } = req.params;
