@@ -60,10 +60,12 @@ router.get("/funder/:funder_id", (req, res) => {
 
   md.getByFunderId(funder_id)
     .then((projects) => {
-      if (projects) {
+      if (projects.length > 0) {
         res.status(200).json({ projects });
       } else {
-        res.status(404).json({ message: "No projects found" });
+        res
+          .status(404)
+          .json({ message: "You fund no projects at the moments" });
       }
     })
     .catch((err) => {
