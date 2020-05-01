@@ -55,6 +55,22 @@ router.get("/category/:category", (req, res) => {
     });
 });
 
+router.get("/funder/:funder_id", (req, res) => {
+  const { funder_id } = req.params;
+
+  md.getByFunderId(funder_id)
+    .then((projects) => {
+      if (projects) {
+        res.status(200).json({ projects });
+      } else {
+        res.status(404).json({ message: "No projects found" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "server error" });
+    });
+});
+
 router.post("/", (req, res) => {
   const project = req.body;
 
