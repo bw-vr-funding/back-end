@@ -3,7 +3,6 @@ const cors = require("cors");
 const helmet = require("helmet");
 const authRouter = require("../auth/auth-router");
 const projectsRouter = require("../projects/projectsRouter");
-const fundersRouter = require("../funders/fundersRouter");
 const authenticator = require("../auth/authenticator");
 
 const server = express();
@@ -13,7 +12,6 @@ server.use(cors());
 server.use(express.json());
 server.use("/auth", authRouter);
 server.use("/projects", authenticator, projectsRouter);
-server.use("/funders", fundersRouter);
 
 server.get("/", (req, res) => {
   res.json({ api: "is up" });
