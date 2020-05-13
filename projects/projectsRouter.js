@@ -47,7 +47,7 @@ router.get("/category/:category", (req, res) => {
       if (projects.length > 0) {
         res.status(200).json({ projects });
       } else {
-        res.status(404).json({ message: "No projects found" });
+        res.status(404).json({ message: "No project found" });
       }
     })
     .catch((err) => {
