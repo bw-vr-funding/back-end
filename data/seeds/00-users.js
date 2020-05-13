@@ -1,12 +1,12 @@
-
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('users').del()
+  return knex("users")
+    .del()
     .then(function () {
       // Inserts seed entries
-      return knex('users').insert([
-        {id: 1, username: 'zakAdmin', password: "321"},
-        {id: 2, username: 'brianAdmin', password: "123"},
+      return knex("users").insert([
+        { id: 1, username: "zakAdmin", password: "321" },
+        { id: 2, username: "brianAdmin", password: "123" },
       ]);
     });
 };
